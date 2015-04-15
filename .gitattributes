@@ -1,0 +1,14 @@
+*.java text
+*.properties text
+*.gradle text
+
+*.css text
+*.js text
+*.html text
+*.json text
+*.yml text
+
+*.png binary
+*.xcf binary
+
+* text=auto
