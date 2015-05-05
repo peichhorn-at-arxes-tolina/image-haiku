@@ -24,3 +24,23 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = "2.2"
 }
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+  repositories { jcenter() }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.1'
+  }
+}
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.fips.imagehaiku.ImageHaikuApplication'
+        attributes 'Implementation-Title': 'Image Haiku' ,'Implementation-Version': version
+    }
+}
