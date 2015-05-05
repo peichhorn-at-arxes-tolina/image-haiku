@@ -17,7 +17,7 @@
             $routeProvider
                 .when('/', {
                     templateUrl: '/app/haiku.html',
-                    controller: 'HaikuController',
+                    controller: 'RandomHaikuController',
                     resolve: {
                         haiku: function ($q, Api) {
                             var defer = $q.defer();
@@ -45,6 +45,16 @@
                 .otherwise({
                     redirectTo: '/'
                 });
+        })
+        .controller('RandomHaikuController', function ($scope, haiku, Api) {
+            var renewHaiku = function() {
+                Api.Haiku.get({}, setHaiku);
+            };
+            var setHaiku = function(h) {
+                $scope.haiku = h;
+                window.setTimeout(renewHaiku, 5000);
+            };
+            setHaiku(haiku);
         })
         .controller('HaikuController', function ($scope, haiku) {
             $scope.haiku = haiku;
