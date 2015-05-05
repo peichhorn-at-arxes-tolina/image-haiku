@@ -1,2 +1,7 @@
 server:
   rootPath:  /api/*
+
+mongoDB:
+  connections:
+    - host: localhost
+      port: 27017

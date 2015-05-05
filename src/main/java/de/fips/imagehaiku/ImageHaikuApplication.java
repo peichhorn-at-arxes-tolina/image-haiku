@@ -1,8 +1,10 @@
 package de.fips.imagehaiku;
 
 import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
 import de.fips.common.lang.Images;
+import de.fips.dropwizardmongo.factory.MongoFactory;
+import de.fips.dropwizardmongo.health.MongoHealthCheck;
+import de.fips.dropwizardmongo.managed.MongoManaged;
 import de.fips.imagehaiku.configuration.ImageHaikuConfiguration;
 import de.fips.imagehaiku.domain.Haiku;
 import de.fips.imagehaiku.domain.HaikuRepository;
@@ -38,7 +40,8 @@ public class ImageHaikuApplication extends Application<ImageHaikuConfiguration> 
 
     @Override
     public void run(final ImageHaikuConfiguration configuration, final Environment environment) throws Exception {
-        final MongoClient mongoClient = new MongoClient(new ServerAddress("localhost",27017));
+        final MongoClient mongoClient = setupMongoDb(configuration, environment);
+
         final Datastore datastore = new Morphia().createDatastore(mongoClient, "ImageHaiku");
 
         if (datastore.createQuery(Haiku.class).countAll() <= 0) {
@@ -48,5 +51,13 @@ public class ImageHaikuApplication extends Application<ImageHaikuConfiguration> 
 
         environment.jersey().register(new ImageResource(new ImageRepository(datastore)));
         environment.jersey().register(new HaikuResource(new HaikuRepository(datastore)));
+    }
+
+    private MongoClient setupMongoDb(final ImageHaikuConfiguration configuration, final Environment environment) throws Exception {
+        final MongoFactory mongoFactory = configuration.getMongoFactory();
+        final MongoClient mongoClient = mongoFactory.buildClient();
+        environment.healthChecks().register("MongoDB", new MongoHealthCheck(mongoClient));
+        environment.lifecycle().manage(new MongoManaged(mongoClient));
+        return mongoClient;
     }
 }
