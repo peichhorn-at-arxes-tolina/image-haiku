@@ -4,6 +4,19 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 version = "1.0"
 
+repositories {
+	mavenCentral()
+}
+
+ext {
+	dropwizardVersion = "0.8.0-rc1"
+}
+
+dependencies {
+	compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+	compile "io.dropwizard:dropwizard-assets:$dropwizardVersion"
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = "2.2"
 }
