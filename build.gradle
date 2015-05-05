@@ -11,12 +11,14 @@ repositories {
 ext {
 	dropwizardVersion = "0.8.0-rc1"
 	morphiaVersion = "0.109"
+    jerseyMediaMultipartVersion = "2.15"
 }
 
 dependencies {
 	compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
 	compile "io.dropwizard:dropwizard-assets:$dropwizardVersion"
 	compile "org.mongodb.morphia:morphia:$morphiaVersion"
+    compile "org.glassfish.jersey.media:jersey-media-multipart:$jerseyMediaMultipartVersion"
 }
 
 task wrapper(type: Wrapper) {

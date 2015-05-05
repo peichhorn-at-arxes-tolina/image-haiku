@@ -10,6 +10,8 @@
     "angular": "1.3.13",
     "angular-route": "1.3.13",
     "angular-resource": "1.3.13",
+    "dropzone": "4.0.1",
+    "autoheight": "0.0.1"
   },
   "resolutions": {
     "angular": "1.3.13"

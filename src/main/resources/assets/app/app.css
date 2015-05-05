@@ -15,6 +15,10 @@ body {
     background-color: #fff;
 }
 
+.upload-button-bar {
+    margin-bottom: 20px;
+}
+
 .haiku blockquote p {
     white-space: pre-line;
 }
@@ -22,4 +26,31 @@ body {
 .haiku img {
     max-width:100%;
     max-height:100%;
+}
+
+.dropzone.dz-clickable {
+    cursor: pointer;
+}
+
+.dropzone .dz-message {
+    font-family: RobotoDraft, Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-kerning: auto;
+    font-size: 18px;
+    font-weight: bold;
+    color: #009688;
+    text-align: center;
+    margin: 2em 0;
+}
+
+.dropzone {
+    min-height: 150px;
+    border: 2px dashed #009688;
+    border-radius: 4px;
+    background: white;
+    padding: 20px 20px;
+    margin-bottom: 20px
+}
+
+.dropzone, .dropzone * {
+    box-sizing: border-box;
 }

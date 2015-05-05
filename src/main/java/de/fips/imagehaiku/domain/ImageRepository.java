@@ -12,6 +12,11 @@ public class ImageRepository {
         this.datastore = datastore;
     }
 
+    public Optional<Image> save(final Image image) {
+        datastore.save(image);
+        return Optional.of(image);
+    }
+
     public Optional<Image> imageByFilename(final String filename) {
         return Optional.of(datastore.find(Image.class).field("filename").equal(filename).get());
     }

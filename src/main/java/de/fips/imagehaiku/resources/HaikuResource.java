@@ -16,6 +16,20 @@ public class HaikuResource {
         this.repository = repository;
     }
 
+    @POST
+    @Timed
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Haiku create(Haiku haiku) {
+        return repository.save(Haiku.create(haiku)).orElseThrow(Responses::notFound);
+    }
+
+    @GET
+    @Timed
+    @Path("{haikuId}")
+    public Haiku haikuById(@PathParam("haikuId") String haikuId) {
+        return repository.haikuById(haikuId).orElseThrow(Responses::notFound);
+    }
+
     /**
      * @implNote The pseude-random document access in this implementation does not hava a uniform distribution.
      */

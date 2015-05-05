@@ -16,6 +16,7 @@ import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
@@ -40,6 +41,7 @@ public class ImageHaikuApplication extends Application<ImageHaikuConfiguration> 
 
     @Override
     public void run(final ImageHaikuConfiguration configuration, final Environment environment) throws Exception {
+        environment.jersey().register(MultiPartFeature.class);
         final MongoClient mongoClient = setupMongoDb(configuration, environment);
 
         final Datastore datastore = new Morphia().createDatastore(mongoClient, "ImageHaiku");
