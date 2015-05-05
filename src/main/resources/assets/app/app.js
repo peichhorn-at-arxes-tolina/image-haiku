@@ -12,6 +12,8 @@
 
     angular.module('ImageHaikuApp', ['ngRoute', 'ImageHaikuApi'])
         .config(function ($routeProvider) {
+            $.material.init();
+
             $routeProvider
                 .when('/', {
                     templateUrl: '/app/haiku.html',
