@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ImageHaikuApp">
 <head>
     <title>Image Haiku</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,8 +7,35 @@
 </head>
 <body>
 
-<h2>Image Haiku. Done!</h2>
+<div class="navbar">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/#/">俳句 Image Haiku</a>
+    </div>
+</div>
 
+<div class="container">
+    <div ng-view></div>
+</div>
+
+<footer class="footer shadow-z-2">
+  <div class="container">
+      <p class="text-muted hidden-xs">Prototype utilizing
+           <a href="http://dropwizard.io">Dropwizard</a>,
+           <a href="https://angularjs.org">AngularJS</a>,
+           <a href="http://getbootstrap.com">Bootstrap</a> and
+           <a href="http://www.mongodb.org">MongoDB</a>.
+       </p>
+
+       <p class="text-muted">
+           <span class="hidden-xs">Copyright</span> &copy; 2015 Philipp Eichhorn, licensed under the
+           <a href="http://opensource.org/licenses/mit-license.php">MIT license</a>.
+       </p>
+  </div>
+</footer>
+
+<script type="text/javascript" src="components/angular/angular.min.js"></script>
+<script type="text/javascript" src="components/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="app/app.js"></script>
 
 </body>
