@@ -1,6 +1,8 @@
 package de.fips.imagehaiku;
 
 import de.fips.imagehaiku.configuration.ImageHaikuConfiguration;
+import de.fips.imagehaiku.resources.HaikuResource;
+import de.fips.imagehaiku.resources.ImageResource;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -27,5 +29,7 @@ public class ImageHaikuApplication extends Application<ImageHaikuConfiguration> 
 
     @Override
     public void run(final ImageHaikuConfiguration configuration, final Environment environment) throws Exception {
+        environment.jersey().register(new ImageResource());
+        environment.jersey().register(new HaikuResource());
     }
 }
