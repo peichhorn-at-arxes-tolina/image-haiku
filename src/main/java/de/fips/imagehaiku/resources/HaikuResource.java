@@ -2,6 +2,7 @@ package de.fips.imagehaiku.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import de.fips.imagehaiku.domain.Haiku;
+import de.fips.imagehaiku.domain.HaikuRepository;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,10 +10,19 @@ import javax.ws.rs.core.MediaType;
 @Path("/haiku")
 @Produces(MediaType.APPLICATION_JSON)
 public class HaikuResource {
+    private final HaikuRepository repository;
 
+    public HaikuResource(HaikuRepository repository) {
+        this.repository = repository;
+    }
+
+    /**
+     * @implNote The pseude-random document access in this implementation does not hava a uniform distribution.
+     */
     @GET
     @Timed
     public Haiku randomHaiku() {
-        return Haiku.create("Basho Matsuo", "An old silent pond...\nA frog jumps into the pond,\nsplash! Silence again.", "img001.png");
+        final double random = Math.random();
+        return repository.haikuByRandomGte(random).orElseGet(() -> repository.haikuByRandomLt(random).orElseThrow(Responses::notFound));
     }
 }

@@ -1,16 +1,24 @@
 package de.fips.imagehaiku.domain;
 
-import java.util.UUID;
+import de.fips.common.lang.Base62;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
 
+@Entity(value = "haiku", noClassnameStored = true)
 public class Haiku {
 
-    private UUID id;
+    @Id
+    private ObjectId id;
     private String author;
     private String text;
     private String image;
+    @Indexed
+    private double random;
 
     public String getId() {
-        return id.toString();
+        return Base62.fromHex(id.toHexString());
     }
 
     public String getAuthor() {
@@ -31,10 +39,11 @@ public class Haiku {
 
     public static Haiku create(String author, String text, String image) {
         Haiku haiku = new Haiku();
-        haiku.id = UUID.randomUUID();
+        haiku.id = new ObjectId();
         haiku.author = author;
         haiku.text = text;
         haiku.image = image;
+        haiku.random = Math.random();
         return haiku;
     }
 }
