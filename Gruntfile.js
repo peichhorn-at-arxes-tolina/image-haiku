@@ -18,5 +18,5 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.registerTask('default', 'sync', 'watch');
+    grunt.registerTask('default', ['sync', 'watch']);
 };
